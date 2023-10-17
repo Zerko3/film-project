@@ -6,7 +6,57 @@
   <!-- render the other views in here -->
   <div class="home--section__main--content">
     <main>
-      <h1>HOME VIEW!</h1>
+      <!-- <h1 class="home--section__main--content__heading--primary">
+        Trending movies and series
+      </h1> -->
+      <dx-gallery
+        #gallery
+        id="gallery"
+        [dataSource]="dataSource"
+        height="100%"
+        width="100%"
+        [slideshowDelay]="slideshowDelay"
+        [loop]="true"
+        [showNavButtons]="false"
+        [showIndicator]="false"
+      >
+        <div *dxTemplate="let filmItem of 'item'">
+          <div class="gallery--div">
+            <div class="film--info">
+              <h1 class="custom--title">
+                {{
+                  filmItem.original_title
+                    ? filmItem.original_title
+                    : filmItem.original_name
+                }}
+              </h1>
+              <p class="release--date">
+                Relese date |
+                {{
+                  filmItem.release_date
+                    ? filmItem.release_date
+                    : filmItem.first_air_date
+                }}
+              </p>
+              <div class="btn--box">
+                <button class="btn btn--main">Watch</button>
+                <button class="btn btn--secondary">Trailer</button>
+              </div>
+              <div class="para--gallery--box">
+                <p class="film--description">Description:</p>
+                <p class="film--overview">{{ filmItem.overview }}</p>
+              </div>
+            </div>
+
+            <img
+              alt="{{ filmItem.Address }}"
+              src="https://image.tmdb.org/t/p/original/{{
+                filmItem.backdrop_path
+              }}"
+            />
+          </div>
+        </div>
+      </dx-gallery>
       <router-outlet></router-outlet>
     </main>
   </div>

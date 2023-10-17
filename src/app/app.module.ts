@@ -9,6 +9,7 @@ import {
   DxListModule,
   DxRadioGroupModule,
   DxToolbarModule,
+  DxGalleryModule,
 } from 'devextreme-angular';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
@@ -33,6 +34,7 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     DxListModule,
     DxRadioGroupModule,
     DxToolbarModule,
+    DxGalleryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
