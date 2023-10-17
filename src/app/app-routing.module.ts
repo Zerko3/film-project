@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { WildCardComponent } from './wild-card/wild-card.component';
+import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponentComponent,
+    children: [
+      {
+        path: 'favoriteFilms',
+        component: FavoriteViewComponent,
+      },
+    ],
   },
   {
     path: '**',

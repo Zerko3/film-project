@@ -2,7 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import {
+  DxDrawerModule,
+  DxListModule,
+  DxRadioGroupModule,
+  DxToolbarModule,
+} from 'devextreme-angular';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
@@ -14,13 +21,20 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     NavigationComponent,
     FavoriteViewComponent,
     HomeComponentComponent,
-    WildCardComponent
+    WildCardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+
+    // devExtreme imports below
+    DxDrawerModule,
+    DxListModule,
+    DxRadioGroupModule,
+    DxToolbarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

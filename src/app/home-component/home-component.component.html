@@ -1,1 +1,13 @@
-<p>home-component works!</p>
+<section class="home--section">
+  <!-- render the nav in here -->
+  <aside class="home--section__navigation">
+    <app-navigation></app-navigation>
+  </aside>
+  <!-- render the other views in here -->
+  <div class="home--section__main--content">
+    <main>
+      <h1>HOME VIEW!</h1>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</section>

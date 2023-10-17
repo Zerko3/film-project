@@ -1,0 +1,56 @@
+html {
+  --main-color: #007bff;
+  --main-color-darker: #004a99;
+  --main-color-lighter: #e6f2ff;
+  --white-color: #fff;
+  --background-color: #f7f7f7;
+  --gray-color: #6c757d;
+  --gray-color-lighter: #e2e3e5;
+  --gray-color-lighter-modified: #f1f1f2;
+  --gray-color-darker: #343a40;
+}
+
+$font-weight: (
+  "font-weight-thin": 100,
+  "font-weight-light": 300,
+  "font-weight-regular": 400,
+  "font-weight-medium": 500,
+  "font-weight-bold": 700,
+  "font-weight-black": 900,
+);
+
+$font-size: (
+  "font-size-small": calc(1rem + 0.2vw),
+  "font-size-regular": calc(1.3rem + 0.5vw),
+  "font-size-medium": calc(1.3rem + 1vw),
+  "font-size-large": calc(1.3rem + 2vw),
+  "font-size-xlarge": calc(2.3rem + 2vw),
+);
+
+$break-points: (
+  "break-point-small-extra": 358px,
+  "break-point-small": 400px,
+  "break-point-bigger-small": 440px,
+  "break-point-medium-small-extra": 515px,
+  "break-point-medium-small": 555px,
+  "break-point-medium": 600px,
+  "break-point-medium-big": 700px,
+  "break-point-tablet-small": 768px,
+  "break-point-tablet": 800px,
+  "break-point-tablet-big": 900px,
+  "break-point-height": 950px,
+  "break-point-desktop-small": 1300px,
+  "break-point-desktop": 1500px,
+);
+
+@function font-weight($font-weight-style) {
+  @return map-get($font-weight, $font-weight-style);
+}
+
+@function font-size($font-size-style) {
+  @return map-get($font-size, $font-size-style);
+}
+
+@function break-point($break-point-limit) {
+  @return map-get($break-points, $break-point-limit);
+}
