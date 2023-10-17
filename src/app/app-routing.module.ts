@@ -13,12 +13,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponentComponent,
-    children: [
-      {
-        path: 'favoriteFilms',
-        component: FavoriteViewComponent,
-      },
-    ],
+  },
+  {
+    path: 'favoriteFilms',
+    component: FavoriteViewComponent,
   },
   {
     path: '**',

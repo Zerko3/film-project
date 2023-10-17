@@ -14,7 +14,7 @@ export class NavigationComponent {
     if (e.target.textContent === 'Home') {
       this.router.navigate(['']);
     } else if (e.target.textContent === 'Favorite films') {
-      this.router.navigate(['home/favoriteFilms']);
+      this.router.navigate(['favoriteFilms']);
     }
   }
 }

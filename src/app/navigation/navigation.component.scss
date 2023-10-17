@@ -2,24 +2,38 @@
 
 .section--navigation {
   background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem;
+
+  &__heading--box {
+    &__heading--primary {
+      font-size: font-size(font-size-regular);
+      color: var(--main-color);
+      font-weight: font-weight(font-weight-thin);
+    }
+  }
 
   &__links--box {
     &--links {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      font-size: font-size(font-size-regular);
-      gap: 1rem;
+      gap: 3rem;
 
       a {
         cursor: pointer;
-        background-color: var(--main-color);
-        padding: 1.2rem;
-        border: none;
-        border-radius: 4px;
-        color: var(--background-color);
-        font-size: font-size(font-size-small);
+        color: var(--main-color);
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-thin);
       }
     }
   }
+}
+
+.user--name {
+  font-size: font-size(font-size-regular);
+  color: var(--main-color);
+  font-weight: font-weight(font-weight-thin);
 }

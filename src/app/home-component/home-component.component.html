@@ -6,9 +6,6 @@
   <!-- render the other views in here -->
   <div class="home--section__main--content">
     <main>
-      <!-- <h1 class="home--section__main--content__heading--primary">
-        Trending movies and series
-      </h1> -->
       <dx-gallery
         #gallery
         id="gallery"
@@ -39,8 +36,16 @@
                 }}
               </p>
               <div class="btn--box">
-                <button class="btn btn--main">Watch</button>
+                <button
+                  (click)="getFilmDataOnUserClick($event)"
+                  class="btn btn--main"
+                >
+                  Watch
+                </button>
                 <button class="btn btn--secondary">Trailer</button>
+                <a class="icon--like--btn">
+                  <i class="dx-icon-like"></i>
+                </a>
               </div>
               <div class="para--gallery--box">
                 <p class="film--description">Description:</p>

@@ -6,7 +6,7 @@
   overflow: hidden;
 
   &__navigation {
-    height: 5vh;
+    height: auto;
     width: 100%;
   }
 
@@ -39,7 +39,7 @@
   padding: 1.2rem;
   height: 100%;
   width: 100%;
-  // background-image: linear-gradient(to bottom, #3333335e, #f0f0f061) !important;
+  background-image: linear-gradient(to bottom, #3333336a, #f0f0f068) !important;
 }
 
 .custom--title {
@@ -103,4 +103,13 @@
 .dx-gallery-item-content,
 .dx-gallery-item-invisible {
   text-wrap: wrap;
+}
+
+.icon--like--btn i {
+  font-size: font-size(font-size-large);
+  color: var(--main-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

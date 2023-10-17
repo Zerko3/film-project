@@ -8,10 +8,11 @@ import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
-  // subject
+  // subject - will get an array
   trendingMoviesSubject = new Subject<TrendingFilm[]>();
 
   // cache data
+  cacheForTrendingMovies: TrendingFilm[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +29,14 @@ export class DataStorage {
 
   // will use this for the showing of trending -> this will be called on init
   getTrendingFilms() {
+    // guard clause so we dont call the API every time we render the home component
+    if (this.cacheForTrendingMovies.length > 0) {
+      // ...
+      console.log('WE HAVE DATA IN CACHE!');
+      console.log(this.cacheForTrendingMovies);
+      return this.cacheForTrendingMovies;
+    }
+
     return this.http
       .get<ResponseDataForTrandingMovies>(
         `https://api.themoviedb.org/3/trending/all/week?api_key=${environment._API_KEY}`,
@@ -39,8 +48,15 @@ export class DataStorage {
         // console.log(responseData);
         console.log(responseData.results);
 
+        // store cache so we dont call the API every time we go to home component
+        this.cacheForTrendingMovies = responseData.results;
+
         // pass the data into the subject to get it on the DOM
         this.trendingMoviesSubject.next(responseData.results);
       });
+  }
+
+  getCacheData() {
+    return this.cacheForTrendingMovies;
   }
 }

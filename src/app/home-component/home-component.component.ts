@@ -12,7 +12,7 @@ import { DataStorage } from 'src/services/data-storage.service';
 export class HomeComponentComponent implements OnInit, OnDestroy {
   trendingMoviesSubscribe: Subscription;
 
-  dataSource;
+  dataSource: TrendingFilm[] = [];
   slideshowDelay: number = 3500;
 
   constructor(private dataStorage: DataStorage) {}
@@ -21,14 +21,18 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     // get trending data from API on component load
     this.dataStorage.getTrendingFilms();
 
-    // subscribe to subject
-    this.dataStorage.trendingMoviesSubject.subscribe(
-      (responseData: TrendingFilm[]) => {
-        console.log(responseData);
+    // get cache data from service -> refactor this
+    this.dataSource = this.dataStorage.getCacheData();
 
-        this.dataSource = responseData;
-      }
-    );
+    // subscribe to subject
+    this.trendingMoviesSubscribe =
+      this.dataStorage.trendingMoviesSubject.subscribe(
+        (responseData: TrendingFilm[]) => {
+          console.log(responseData);
+
+          this.dataSource = responseData;
+        }
+      );
 
     // specific movie
     // this.dataStorage.getSpecificMovieDetails();
@@ -37,5 +41,10 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   // unsubscribe from observables
   ngOnDestroy(): void {
     this.trendingMoviesSubscribe.unsubscribe();
+  }
+
+  // get the object of the trending film and pass it to the API
+  getFilmDataOnUserClick(e) {
+    console.log(e);
   }
 }
