@@ -9,7 +9,8 @@ export interface TrendingFilm {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
   title: string;
   video: boolean;
   vote_average: number;

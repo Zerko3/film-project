@@ -4,6 +4,19 @@
       <h1 class="section--navigation__heading--box__heading--primary">
         Film-io
       </h1>
+      <div class="section--navigation__heading--box__search--box">
+        <form #form="ngForm" (submit)="onUserSearchSubmit()">
+          <input
+            placeholder="Search a movie..."
+            type="text"
+            name="movieName"
+            id="movieName"
+            ngModel
+            required
+          />
+          <button type="submit"><i class="dx-icon-find"></i></button>
+        </form>
+      </div>
     </div>
     <div class="section--navigation__links--box">
       <ul class="section--navigation__links--box--links">

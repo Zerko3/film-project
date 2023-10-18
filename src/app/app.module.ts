@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -11,6 +11,8 @@ import {
   DxToolbarModule,
   DxGalleryModule,
   DxButtonModule,
+  DxFormModule,
+  DxTreeListModule,
 } from 'devextreme-angular';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
@@ -29,6 +31,7 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
 
     // devExtreme imports below
     DxDrawerModule,
@@ -37,6 +40,8 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     DxToolbarModule,
     DxGalleryModule,
     DxButtonModule,
+    DxFormModule,
+    DxTreeListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

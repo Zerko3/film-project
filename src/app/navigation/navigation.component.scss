@@ -8,10 +8,50 @@
   padding: 1.2rem;
 
   &__heading--box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+
     &__heading--primary {
       font-size: font-size(font-size-regular);
       color: var(--main-color);
       font-weight: font-weight(font-weight-thin);
+    }
+
+    &__search--box {
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+      input {
+        border: none;
+        height: 2rem;
+        width: 15rem;
+        font-size: 1.2rem;
+        border-radius: 4px;
+        padding: 0 0 0 1rem;
+      }
+
+      ::placeholder {
+        color: #333;
+      }
+
+      button {
+        border: none;
+        background-color: unset;
+      }
+
+      button i {
+        color: var(--main-color);
+        font-size: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
     }
   }
 
@@ -36,4 +76,8 @@
   font-size: font-size(font-size-regular);
   color: var(--main-color);
   font-weight: font-weight(font-weight-thin);
+}
+
+dx-form {
+  background-color: red;
 }

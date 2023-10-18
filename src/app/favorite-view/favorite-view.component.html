@@ -18,10 +18,15 @@
         />
         <div class="favorite__film--box__info--box">
           <h1>{{ film.title }}</h1>
-          <p>Release date | {{ film.release_date }}</p>
+          <p>
+            Release date |
+            {{ film.release_date ? film.release_date : film.first_air_date }}
+          </p>
           <div class="favorite__film--box__info--box__btn--box">
             <button class="btn btn--main">Watch</button>
-            <button class="btn btn--secondary">Remove</button>
+            <button (click)="onUserDeleteFilm(film)" class="btn btn--secondary">
+              Remove
+            </button>
           </div>
         </div>
       </div>

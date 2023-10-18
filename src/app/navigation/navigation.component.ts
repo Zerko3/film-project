@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataStorage } from 'src/services/data-storage.service';
 
 @Component({
   selector: 'app-navigation',
@@ -7,7 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-  constructor(private router: Router) {}
+  movieSearchData: {
+    movieName: string;
+  } = {
+    movieName: '',
+  };
+
+  buttonOptions: any = {
+    text: 'Search',
+    type: 'success',
+    useSubmitBehavior: true,
+  };
+
+  constructor(private router: Router, private dataStorage: DataStorage) {}
+  @ViewChild('form') formComponent: NgForm;
 
   // allows user to navigate via Router
   onUserNavigate(e: any) {
@@ -16,5 +31,14 @@ export class NavigationComponent {
     } else if (e.target.textContent === 'Favorite films') {
       this.router.navigate(['favoriteFilms']);
     }
+  }
+
+  // on user submit get the data and pass it into the API
+  onUserSearchSubmit() {
+    let movieName = this.formComponent.form.value.movieName;
+
+    console.log(movieName);
+
+    this.dataStorage.getMovieFromSearch(movieName);
   }
 }

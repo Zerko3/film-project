@@ -1,26 +1,48 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
+import { SearchData } from 'src/interfaces/searchData.interface';
 import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
   // subject - will get an array
   trendingMoviesSubject = new Subject<TrendingFilm[]>();
+  searchMovieSubject = new Subject<any>();
 
   // cache data
   cacheForTrendingMovies: TrendingFilm[] = [];
 
   constructor(private http: HttpClient) {}
 
+  // search api end point
+  getMovieFromSearch(userSearchMovie: string) {
+    console.log(userSearchMovie);
+    return this.http
+      .get<SearchData>(
+        `https://api.themoviedb.org/3/search/movie?query=${userSearchMovie}&api_key=${environment._API_KEY}`,
+        {
+          params: new HttpParams().set('auth', environment._AUTH_TOKEN),
+        }
+      )
+      .subscribe((responseData: SearchData) => {
+        console.log(responseData.results);
+        // pass into the subject we will get this data in the home
+        this.searchMovieSubject.next(responseData.results);
+      });
+  }
+
   // will use this for specigic movie -> this will be called on click
   getSpecificMovieDetails() {
     return this.http
       .get(
-        `https://api.themoviedb.org/3/movie/575264?api_key=${environment._API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/movie/575264?api_key=${environment._API_KEY}&language=en-US`,
+        {
+          params: new HttpParams().set('auth', environment._AUTH_TOKEN),
+        }
       )
       .subscribe((data) => {
         console.log(data);

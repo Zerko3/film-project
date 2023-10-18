@@ -15,5 +15,16 @@ export class FavoriteViewComponent implements OnInit {
     // get favorite films on init
     this.favoriteMoviesArray = this.state.getLikedMovies();
     console.log(this.favoriteMoviesArray);
+
+    this.state.updatedFavoriteMoviesArraySubject.subscribe(
+      (responseData: TrendingFilm[]) => {
+        this.favoriteMoviesArray = responseData;
+      }
+    );
+  }
+
+  onUserDeleteFilm(deletedFilm: TrendingFilm) {
+    // pass the selcted item into the state to delete it
+    this.state.removeAfilmFromFavoritesArray(deletedFilm);
   }
 }

@@ -25,10 +25,11 @@
     &__view {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      align-items: center;
+      justify-self: center;
       gap: 2rem;
 
       .favorite__film--box {
+        justify-self: center;
         height: 40rem;
         width: 30rem;
         background-color: #fef9e8;

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
 import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 import { DataStorage } from 'src/services/data-storage.service';
@@ -14,7 +14,11 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   trendingMoviesSubscribe: Subscription;
 
   dataSource: TrendingFilm[] = [];
+  searchResultsArray: TrendingFilm[] = [];
   slideshowDelay: number = 3500;
+
+  // boolean
+  searchSidebarOpenStatus: boolean;
 
   constructor(private dataStorage: DataStorage, private state: State) {}
 
@@ -38,11 +42,25 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
 
     // specific movie
     // this.dataStorage.getSpecificMovieDetails();
+
+    this.dataStorage.searchMovieSubject.subscribe(
+      (responseData: TrendingFilm[]) => {
+        this.searchResultsArray = responseData;
+        console.log(this.searchResultsArray);
+
+        this.searchSidebarOpenStatus = true;
+      }
+    );
   }
 
   // unsubscribe from observables
   ngOnDestroy(): void {
     this.trendingMoviesSubscribe.unsubscribe();
+  }
+
+  // close the search sidebar
+  onClickCloseSearchWindow() {
+    this.searchSidebarOpenStatus = false;
   }
 
   // get the object of the trending film and pass it to the state
