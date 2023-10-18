@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
 import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 import { DataStorage } from 'src/services/data-storage.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-home-component',
@@ -15,7 +16,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   dataSource: TrendingFilm[] = [];
   slideshowDelay: number = 3500;
 
-  constructor(private dataStorage: DataStorage) {}
+  constructor(private dataStorage: DataStorage, private state: State) {}
 
   ngOnInit(): void {
     // get trending data from API on component load
@@ -30,6 +31,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
         (responseData: TrendingFilm[]) => {
           console.log(responseData);
 
+          // pass the data into the array to display it
           this.dataSource = responseData;
         }
       );
@@ -43,8 +45,8 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     this.trendingMoviesSubscribe.unsubscribe();
   }
 
-  // get the object of the trending film and pass it to the API
-  getFilmDataOnUserClick(e) {
-    console.log(e);
+  // get the object of the trending film and pass it to the state
+  getFilmDataOnUserClick(targetedMovie: TrendingFilm) {
+    this.state.storeLikedMoviesOnUserClick(targetedMovie);
   }
 }

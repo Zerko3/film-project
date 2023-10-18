@@ -1,4 +1,5 @@
 @use "../../style/scss/global-variables" as *;
+@use "../../style/scss/mixins" as *;
 
 .home--section {
   height: 100vh;
@@ -31,10 +32,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
+  @include flexbox--aling-flex-start__justify-center;
   gap: 1rem;
   padding: 1.2rem;
   height: 100%;
@@ -74,9 +72,7 @@
 }
 
 .btn--box {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  @include flexbox--flex-start;
   gap: 1rem;
 }
 
@@ -91,10 +87,9 @@
 .para--gallery--box {
   width: 50%;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+
+  @include flexbox--aling-flex-start__justify-center;
+
   padding: 1rem;
 }
 
@@ -109,7 +104,5 @@
   font-size: font-size(font-size-large);
   color: var(--main-color);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexbox--center--all;
 }

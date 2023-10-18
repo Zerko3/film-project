@@ -1,4 +1,30 @@
-<section>
+<section class="favorite__view--section">
   <!-- use navigation in here -->
-  <app-navigation></app-navigation>
+  <div class="favorite__view--section__navigation--box">
+    <app-navigation></app-navigation>
+  </div>
+
+  <!-- favorite films view goes here -->
+  <div class="favorite__view--section__favorite--films--box">
+    <div class="favorite__view--section__favorite--films--box__heading--box">
+      <h1>Your favorite films:</h1>
+    </div>
+    <!-- render all the liked films here -->
+    <div class="favorite__view--section__favorite--films--box__view">
+      <div class="favorite__film--box" *ngFor="let film of favoriteMoviesArray">
+        <img
+          src="https://image.tmdb.org/t/p/original/{{ film.backdrop_path }}"
+          alt="{{ film.title }}"
+        />
+        <div class="favorite__film--box__info--box">
+          <h1>{{ film.title }}</h1>
+          <p>Release date | {{ film.release_date }}</p>
+          <div class="favorite__film--box__info--box__btn--box">
+            <button class="btn btn--main">Watch</button>
+            <button class="btn btn--secondary">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

@@ -36,14 +36,12 @@
                 }}
               </p>
               <div class="btn--box">
-                <button
-                  (click)="getFilmDataOnUserClick($event)"
-                  class="btn btn--main"
-                >
-                  Watch
-                </button>
+                <button class="btn btn--main">Watch</button>
                 <button class="btn btn--secondary">Trailer</button>
-                <a class="icon--like--btn">
+                <a
+                  (click)="getFilmDataOnUserClick(filmItem)"
+                  class="icon--like--btn"
+                >
                   <i class="dx-icon-like"></i>
                 </a>
               </div>
@@ -54,7 +52,7 @@
             </div>
 
             <img
-              alt="{{ filmItem.Address }}"
+              alt="{{ filmItem.title }}"
               src="https://image.tmdb.org/t/p/original/{{
                 filmItem.backdrop_path
               }}"
