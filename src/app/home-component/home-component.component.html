@@ -59,6 +59,12 @@
       >
         <div *dxTemplate="let filmItem of 'item'">
           <div class="gallery--div">
+            <img
+              alt="{{ filmItem.title }}"
+              src="https://image.tmdb.org/t/p/original/{{
+                filmItem.backdrop_path
+              }}"
+            />
             <div class="film--info">
               <h1 class="custom--title">
                 {{ filmItem.original_title }}
@@ -83,12 +89,12 @@
               </div>
             </div>
 
-            <img
+            <!-- <img
               alt="{{ filmItem.title }}"
               src="https://image.tmdb.org/t/p/original/{{
                 filmItem.backdrop_path
               }}"
-            />
+            /> -->
           </div>
         </div>
       </dx-gallery>

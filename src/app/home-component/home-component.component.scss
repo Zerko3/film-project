@@ -6,6 +6,10 @@
   width: 100vw;
   overflow: hidden;
 
+  @include media-tablet-big {
+    overflow: scroll;
+  }
+
   &__navigation {
     height: auto;
     width: 100%;
@@ -146,6 +150,10 @@
   }
 }
 
+dx-gallery {
+  height: 100vh !important;
+}
+
 .gallery--div {
   position: relative;
   height: 100%;
@@ -162,29 +170,46 @@
   height: 100%;
   width: 100%;
   background-image: linear-gradient(to bottom, #3333336a, #f0f0f068) !important;
-}
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
 
-.custom--title {
-  font-size: 3.2rem;
-  color: var(--main-color);
+  @include media-tablet-big {
+    bottom: initial;
+    top: 46%;
+    z-index: 800;
+    justify-content: flex-start;
+  }
+
+  .custom--title {
+    position: relative;
+
+    font-size: font-size(font-size-large);
+    color: var(--main-color);
+  }
+
+  .release--date,
+  .film--overview,
+  .film--description {
+    position: relative;
+    font-size: font-size(font-size-regular);
+    color: var(--text-color);
+    text-align: left;
+  }
 }
 
 ::ng-deep .dx-gallery-item img {
-  height: auto;
+  height: 100vh;
   width: 100%;
-}
 
-.release--date,
-.film--overview,
-.film--description {
-  position: relative;
-  font-size: 2rem;
-  color: var(--text-color);
-  text-align: left;
+  @include media-tablet-big {
+    height: 400px;
+  }
 }
 
 .film--overview {
-  font-size: 1.7rem;
+  font-size: font-size(font-size-small);
 }
 
 .btn {
@@ -215,6 +240,10 @@
   @include flexbox--aling-flex-start__justify-center;
 
   padding: 1rem;
+
+  @include media-tablet-big {
+    width: 100%;
+  }
 }
 
 .dx-template-wrapper,
