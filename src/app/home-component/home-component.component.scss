@@ -227,10 +227,22 @@ dx-gallery {
 
 .btn--main {
   background-color: var(--main-color);
+  transition: all 0.35s;
+}
+
+.btn--main:hover,
+.btn--main:active {
+  background-color: var(--main-color-darker);
 }
 
 .btn--secondary {
+  transition: all 0.35s;
   background-color: var(--secondary-color);
+}
+
+.btn--secondary:hover,
+.btn--secondary:active {
+  background-color: var(--main-color);
 }
 
 .para--gallery--box {
@@ -253,11 +265,20 @@ dx-gallery {
   text-wrap: wrap;
 }
 
+.icon--like--btn,
 .icon--like--btn i {
   font-size: font-size(font-size-large);
   color: var(--main-color);
   cursor: pointer;
   @include flexbox--center--all;
+  position: relative;
+}
+
+.icon--like--btn i:hover,
+.icon--like--btn i:active {
+  scale: 1.7;
+  transition: all 0.35s;
+  color: red;
 }
 
 @keyframes side_window_animation {

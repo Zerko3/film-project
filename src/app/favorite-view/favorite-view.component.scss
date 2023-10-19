@@ -71,9 +71,31 @@
           height: 50%;
           width: 100%;
 
-          h1 {
-            font-size: 2rem;
-            color: #333;
+          &__heading--box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 1rem;
+
+            h1 {
+              font-size: 2rem;
+              color: #333;
+            }
+
+            button {
+              background-color: unset;
+              border: none;
+
+              i {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #333;
+                font-size: font-size(font-size-large);
+                cursor: pointer;
+              }
+            }
           }
 
           p {
@@ -95,10 +117,22 @@
 
             .btn--main {
               background-color: var(--main-color);
+              transition: all 0.35s;
+            }
+
+            .btn--main:hover,
+            .btn--main:active {
+              background-color: var(--main-color-darker);
             }
 
             .btn--secondary {
+              transition: all 0.35s;
               background-color: var(--secondary-color);
+            }
+
+            .btn--secondary:hover,
+            .btn--secondary:active {
+              background-color: var(--main-color);
             }
           }
         }

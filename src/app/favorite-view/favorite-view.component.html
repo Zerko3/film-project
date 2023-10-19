@@ -22,9 +22,13 @@
           alt="{{ film.title }}"
         />
         <div class="favorite__film--box__info--box">
-          <h1>
-            {{ film.original_title }}
-          </h1>
+          <div class="favorite__film--box__info--box__heading--box">
+            <h1>
+              {{ film.original_title }}
+            </h1>
+            <button><i class="dx-icon-info"></i></button>
+          </div>
+
           <p>
             Release date |
             {{ film.release_date }}

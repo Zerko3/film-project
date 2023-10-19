@@ -4,6 +4,7 @@ import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 
 @Injectable({ providedIn: 'root' })
 export class State {
+  // arrays
   favoriteMoviesArray: TrendingFilm[] = [];
 
   // subjects
@@ -13,7 +14,6 @@ export class State {
 
   // TODO:
 
-  // 2. Make the design responsive
   // 3. Make some UX changes, when adding to favorite, make some toast and icon animation, aswell as removeing
 
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
