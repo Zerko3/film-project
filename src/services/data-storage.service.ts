@@ -35,9 +35,9 @@ export class DataStorage {
   getMovieFromSearch(userSearchMovie: string): SearchData | Subscription {
     return this.http
       .get<SearchData>(
-        `https://api.themoviedb.org/3/search/movie?query=${userSearchMovie}&api_key=${environment._API_KEY}`,
+        `https://api.themoviedb.org/3/search/movie?query=${userSearchMovie}&api_key=${environment.API_KEY}`,
         {
-          params: new HttpParams().set('auth', environment._AUTH_TOKEN),
+          params: new HttpParams().set('auth', environment.AUTH_TOKEN),
         }
       )
       .subscribe(
@@ -61,9 +61,9 @@ export class DataStorage {
   getSpecificMovieDetails(movieId: number) {
     return this.http
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${environment._API_KEY}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${environment.API_KEY}&language=en-US`,
         {
-          params: new HttpParams().set('auth', environment._AUTH_TOKEN),
+          params: new HttpParams().set('auth', environment.AUTH_TOKEN),
         }
       )
       .subscribe(
@@ -89,9 +89,9 @@ export class DataStorage {
 
     return this.http
       .get<ResponseDataForTrandingMovies>(
-        `https://api.themoviedb.org/3/trending/movie/week?api_key=${environment._API_KEY}`,
+        `https://api.themoviedb.org/3/trending/movie/week?api_key=${environment.API_KEY}`,
         {
-          params: new HttpParams().set('auth', environment._AUTH_TOKEN),
+          params: new HttpParams().set('auth', environment.AUTH_TOKEN),
         }
       )
       .subscribe(
