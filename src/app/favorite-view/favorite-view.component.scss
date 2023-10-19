@@ -28,6 +28,10 @@
       justify-self: center;
       gap: 2rem;
 
+      .para--indication {
+        font-size: font-size(font-size-regular);
+      }
+
       .favorite__film--box {
         justify-self: center;
         height: 40rem;

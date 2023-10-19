@@ -35,10 +35,15 @@ export class NavigationComponent {
 
   // on user submit get the data and pass it into the API
   onUserSearchSubmit() {
-    let movieName = this.formComponent.form.value.movieName;
+    if (this.formComponent.status === 'VALID') {
+      let movieName = this.formComponent.form.value.movieName;
 
-    console.log(movieName);
+      console.log(movieName);
 
-    this.dataStorage.getMovieFromSearch(movieName);
+      // pass the string into the API so we get data back
+      this.dataStorage.getMovieFromSearch(movieName);
+    }
+    // reset the form for better UX
+    this.formComponent.reset();
   }
 }

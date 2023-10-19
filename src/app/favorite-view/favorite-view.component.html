@@ -11,6 +11,11 @@
     </div>
     <!-- render all the liked films here -->
     <div class="favorite__view--section__favorite--films--box__view">
+      <ng-container *ngIf="favoriteMoviesArray.length === 0">
+        <p class="para--indication">
+          Add some movies to your favorites list to view them here!
+        </p>
+      </ng-container>
       <div class="favorite__film--box" *ngFor="let film of favoriteMoviesArray">
         <img
           src="https://image.tmdb.org/t/p/original/{{ film.backdrop_path }}"
