@@ -1,0 +1,21 @@
+<div class="search__window__content--box">
+  <div class="search__film--box" *ngFor="let film of searchResultsArray">
+    <img
+      src="https://image.tmdb.org/t/p/original/{{ film.backdrop_path }}"
+      alt="{{ film.title }}"
+    />
+    <div class="search__film--box__info--box">
+      <h1>{{ film.title }}</h1>
+      <p>Release date | {{ film.release_date }}</p>
+      <div class="search__film--box__info--box__btn--box">
+        <button class="btn btn--main">Watch</button>
+        <button
+          (click)="getFilmDataOnUserClick(film)"
+          class="btn btn--secondary"
+        >
+          Add to favorite
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { WildCardComponent } from './wild-card/wild-card.component';
+import { SearchWindowComponent } from './search-window/search-window.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     FavoriteViewComponent,
     HomeComponentComponent,
     WildCardComponent,
+    SearchWindowComponent,
   ],
   imports: [
     BrowserModule,

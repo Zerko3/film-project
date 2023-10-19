@@ -14,7 +14,6 @@ export class State {
 
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
   storeLikedMoviesOnUserClick(likedMovie: TrendingFilm) {
-    console.log(likedMovie);
     // 1. pass the liked movie into the array
     this.favoriteMoviesArray.push(likedMovie);
 
