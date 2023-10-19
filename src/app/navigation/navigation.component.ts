@@ -38,8 +38,6 @@ export class NavigationComponent {
     if (this.formComponent.status === 'VALID') {
       let movieName = this.formComponent.form.value.movieName;
 
-      console.log(movieName);
-
       // pass the string into the API so we get data back
       this.dataStorage.getMovieFromSearch(movieName);
     }

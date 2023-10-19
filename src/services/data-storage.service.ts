@@ -43,7 +43,6 @@ export class DataStorage {
       )
       .subscribe(
         (responseData: SearchData) => {
-          console.log(responseData.results);
           // pass into the subject we will get this data in the home
           this.searchMovieSubject.next(responseData.results);
         },
@@ -93,9 +92,6 @@ export class DataStorage {
       )
       .subscribe(
         (responseData: ResponseDataForTrandingMovies) => {
-          // console.log(responseData);
-          console.log(responseData.results);
-
           // store cache so we dont call the API every time we go to home component
           this.cacheForTrendingMovies = responseData.results;
 
@@ -103,9 +99,6 @@ export class DataStorage {
           this.trendingMoviesSubject.next(responseData.results);
         },
         (error: HttpErrorResponse) => {
-          console.log('THIS IS AN ERROR NOW!');
-          console.log(error);
-
           // pass the error subject into the home component
           this.errorSubject.next(error);
         }
@@ -121,8 +114,6 @@ export class DataStorage {
     this.favoriteMoviesArray = JSON.parse(
       localStorage.getItem('storedLikedMovies')
     );
-
-    console.log(this.favoriteMoviesArray);
 
     return this.favoriteMoviesArray;
   }

@@ -25,9 +25,6 @@ export class State {
   }
 
   removeAfilmFromFavoritesArray(selectedFilm: TrendingFilm) {
-    console.log(selectedFilm);
-    console.log(this.favoriteMoviesArray);
-
     // loop over the array, if the id of the item === selectedFilm.id then get that index
     const indexOfSelectedFilm = this.favoriteMoviesArray.findIndex(
       (film) => film.id === selectedFilm.id

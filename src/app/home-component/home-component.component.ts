@@ -57,7 +57,6 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
       (responseData: TrendingFilm[]) => {
         this.searchResultsArray = responseData;
-        console.log(this.searchResultsArray);
 
         this.searchSidebarOpenStatus = true;
       }

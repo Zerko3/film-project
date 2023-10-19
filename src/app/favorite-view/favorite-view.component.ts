@@ -59,8 +59,6 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     this.additionalInfoSubscribe =
       this.dataStorage.additionalInfoSubject.subscribe(
         (responseData: AdditionalInfoForTrendingFilm) => {
-          console.log(responseData);
-
           this.popupVisible = true;
 
           this.selectedFilm = responseData;
@@ -71,8 +69,6 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     this.dataStorage.errorSubject
       .pipe(take(1))
       .subscribe((errorMsg: HttpErrorResponse) => {
-        console.log(errorMsg);
-
         // handle here
         this.isVisible = true;
         this.message = `${errorMsg.error.status_message}. Please refresh the page. If the error persists, call our support.`;
@@ -82,7 +78,6 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
       (responseData: TrendingFilm[]) => {
         this.searchResultsArray = responseData;
-        console.log(this.searchResultsArray);
 
         this.searchSidebarOpenStatus = true;
       }
