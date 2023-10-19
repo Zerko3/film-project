@@ -1,4 +1,5 @@
 @use "../../style/scss/global-variables" as *;
+@use "../../style/scss/mixins" as *;
 
 .section--navigation {
   background-color: var(--background-color);
@@ -17,6 +18,10 @@
       font-size: font-size(font-size-regular);
       color: var(--main-color);
       font-weight: font-weight(font-weight-thin);
+
+      @include media-small-extra {
+        display: none;
+      }
     }
 
     &__search--box {
@@ -33,6 +38,11 @@
         font-size: 1.2rem;
         border-radius: 4px;
         padding: 0 0 0 1rem;
+
+        @include media-bigger-small {
+          width: 10rem;
+          height: 1.5rem;
+        }
       }
 
       ::placeholder {
@@ -61,6 +71,10 @@
       align-items: center;
       justify-content: flex-end;
       gap: 3rem;
+
+      @include media-bigger-small {
+        gap: 1.5rem;
+      }
 
       a {
         cursor: pointer;

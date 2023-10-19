@@ -26,7 +26,19 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       justify-self: center;
-      gap: 2rem;
+      gap: 1rem;
+
+      @include media-desktop-small {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @include media-tablet-small {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media-medium-small-extra {
+        grid-template-columns: repeat(1, 1fr);
+      }
 
       .para--indication {
         font-size: font-size(font-size-regular);
@@ -34,8 +46,10 @@
 
       .favorite__film--box {
         justify-self: center;
-        height: 40rem;
-        width: 30rem;
+        max-height: 40rem;
+        max-width: 30rem;
+        min-height: 30rem;
+        min-width: 20rem;
         background-color: #fef9e8;
         display: flex;
         align-items: center;
