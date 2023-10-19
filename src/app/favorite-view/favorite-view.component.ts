@@ -29,6 +29,7 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
   additionalInfoSubscribe: Subscription;
   updateFavoriteArraySubscribe: Subscription;
   searchMoviesSubscribe: Subscription;
+  errorSubscribe: Subscription;
 
   // toast - devextreme element
   isVisible: boolean = false;
@@ -74,14 +75,14 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
       );
 
     // error handle the API
-    this.dataStorage.errorSubject
-      .pipe(take(1))
-      .subscribe((errorMsg: HttpErrorResponse) => {
+    this.errorSubscribe = this.dataStorage.errorSubject.subscribe(
+      (errorMsg: HttpErrorResponse) => {
         // handle here
         this.isVisible = true;
         this.message = `${errorMsg.error.status_message}. Please refresh the page. If the error persists, call our support.`;
         this.type = errorMsg ? 'error' : 'success';
-      });
+      }
+    );
 
     // we subscribe to the search so when the user wants to search for a film in the favorites component and if he clicks on the add to favorite button it will show on the screen as soon as the user click for better UX.s
     this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
@@ -98,6 +99,7 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     this.additionalInfoSubscribe.unsubscribe();
     this.updateFavoriteArraySubscribe.unsubscribe();
     this.searchMoviesSubscribe.unsubscribe();
+    this.errorSubscribe.unsubscribe();
   }
 
   // pass the selcted item into the state to delete it
