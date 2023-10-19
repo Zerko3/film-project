@@ -69,10 +69,22 @@
 
         .btn--main {
           background-color: var(--main-color);
+          transition: all 0.35s;
+        }
+
+        .btn--main:hover,
+        .btn--main:active {
+          background-color: var(--main-color-darker);
         }
 
         .btn--secondary {
+          transition: all 0.35s;
           background-color: var(--secondary-color);
+        }
+
+        .btn--secondary:hover,
+        .btn--secondary:active {
+          background-color: var(--main-color);
         }
       }
     }
