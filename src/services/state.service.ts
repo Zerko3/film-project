@@ -12,17 +12,17 @@ export class State {
   constructor() {}
 
   // TODO:
-  // 1. Store data in the local storage
+
   // 2. Make the design responsive
   // 3. Make some UX changes, when adding to favorite, make some toast and icon animation, aswell as removeing
-  // 4.
 
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
   storeLikedMoviesOnUserClick(likedMovie: TrendingFilm) {
+    console.log(likedMovie);
     // 1. pass the liked movie into the array
     this.favoriteMoviesArray.push(likedMovie);
 
-    // 2. set the local storage in here, we pass the array into the local storage
+    // // 2. set the local storage in here, we pass the array into the local storage
     localStorage.setItem(
       'storedLikedMovies',
       JSON.stringify(this.favoriteMoviesArray)
@@ -31,16 +31,29 @@ export class State {
 
   removeAfilmFromFavoritesArray(selectedFilm: TrendingFilm) {
     console.log(selectedFilm);
+    console.log(this.favoriteMoviesArray);
 
-    let indexOfSelcetedFilm = this.favoriteMoviesArray.indexOf(selectedFilm);
+    // loop over the array, if the id of the item === selectedFilm.id then get that index
+    const indexOfSelectedFilm = this.favoriteMoviesArray.findIndex(
+      (film) => film.id === selectedFilm.id
+    );
 
-    this.favoriteMoviesArray.splice(indexOfSelcetedFilm, 1);
+    // if this id is in the array then remove it. If we get -1 then there is no such item in the array and do nothing
+    if (indexOfSelectedFilm !== -1) {
+      this.favoriteMoviesArray.splice(indexOfSelectedFilm, 1);
 
-    // pass the new array into the subject -> we need to update the DOM as soon as we delete it for better UX
-    this.updatedFavoriteMoviesArraySubject.next(this.favoriteMoviesArray);
+      // Pass the new array into the subject to update the DOM.
+      this.updatedFavoriteMoviesArraySubject.next(this.favoriteMoviesArray);
+    }
 
-    // we need to overrite this array here
     return this.favoriteMoviesArray;
+  }
+
+  // we call this method when we get to the Favorite component. It only gets called if there are items inside the local storage
+  storeLocalStorageItemsInsideFavoritesArrayOnRefresh(
+    arrayFromLocalStorage: TrendingFilm[]
+  ): void {
+    this.favoriteMoviesArray = arrayFromLocalStorage;
   }
 
   // get the array of liked movies
