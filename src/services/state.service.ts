@@ -12,6 +12,9 @@ export class State {
 
   constructor() {}
 
+  // TODO:
+  //1. If local storage does not have an array we crash the app
+
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
   storeLikedMoviesOnUserClick(likedMovie: TrendingFilm) {
     // 1. pass the liked movie into the array

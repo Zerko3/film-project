@@ -39,16 +39,19 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
   constructor(private state: State, private dataStorage: DataStorage) {}
 
   ngOnInit(): void {
-    // get data from the local storag if there are any items in there
-    if (JSON.parse(localStorage.getItem('storedLikedMovies')).length > 0) {
+    // Get data from local storage if there are any items in there
+    const storedLikedMovies = JSON.parse(
+      localStorage.getItem('storedLikedMovies')
+    );
+    if (storedLikedMovies && storedLikedMovies.length > 0) {
       this.favoriteMoviesArray = this.dataStorage.getDataFromLocalStorage();
 
-      // pass the array from local storage inside the state. We need this to remove items if we want to.
+      // Pass the array from local storage inside the state. We need this to remove items if we want to.
       this.state.storeLocalStorageItemsInsideFavoritesArrayOnRefresh(
         this.favoriteMoviesArray
       );
     } else {
-      // get favorite films on init
+      // Handle the case when there's nothing in local storage
       this.favoriteMoviesArray = this.state.getLikedMovies();
     }
 

@@ -38,6 +38,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
 
     // get cache data from service if we have any
     this.dataSource = this.dataStorage.getCacheData();
+    console.log(this.dataSource);
 
     // subscribe to subject from the API component we call in this component on init
     this.trendingMoviesSubscribe =
