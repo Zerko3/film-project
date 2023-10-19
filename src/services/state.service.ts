@@ -11,10 +11,22 @@ export class State {
 
   constructor() {}
 
+  // TODO:
+  // 1. Store data in the local storage
+  // 2. Make the design responsive
+  // 3. Make some UX changes, when adding to favorite, make some toast and icon animation, aswell as removeing
+  // 4.
+
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
   storeLikedMoviesOnUserClick(likedMovie: TrendingFilm) {
     // 1. pass the liked movie into the array
     this.favoriteMoviesArray.push(likedMovie);
+
+    // 2. set the local storage in here, we pass the array into the local storage
+    localStorage.setItem(
+      'storedLikedMovies',
+      JSON.stringify(this.favoriteMoviesArray)
+    );
   }
 
   removeAfilmFromFavoritesArray(selectedFilm: TrendingFilm) {

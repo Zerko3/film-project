@@ -61,19 +61,11 @@
           <div class="gallery--div">
             <div class="film--info">
               <h1 class="custom--title">
-                {{
-                  filmItem.original_title
-                    ? filmItem.original_title
-                    : filmItem.original_name
-                }}
+                {{ filmItem.original_title }}
               </h1>
               <p class="release--date">
                 Relese date |
-                {{
-                  filmItem.release_date
-                    ? filmItem.release_date
-                    : filmItem.first_air_date
-                }}
+                {{ filmItem.release_date }}
               </p>
               <div class="btn--box">
                 <button class="btn btn--main">Watch</button>

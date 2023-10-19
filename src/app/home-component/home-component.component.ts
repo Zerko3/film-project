@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, take } from 'rxjs';
-import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
+import { Subscription } from 'rxjs';
 import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
 import { DataStorage } from 'src/services/data-storage.service';
 import { State } from 'src/services/state.service';
@@ -29,7 +28,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     // get cache data from service -> refactor this
     this.dataSource = this.dataStorage.getCacheData();
 
-    // subscribe to subject
+    // subscribe to subject from the API component we call in this comonent on init
     this.trendingMoviesSubscribe =
       this.dataStorage.trendingMoviesSubject.subscribe(
         (responseData: TrendingFilm[]) => {
@@ -59,12 +58,12 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   }
 
   // close the search sidebar
-  onClickCloseSearchWindow() {
+  onClickCloseSearchWindow(): void {
     this.searchSidebarOpenStatus = false;
   }
 
-  // get the object of the trending film and pass it to the state
-  getFilmDataOnUserClick(targetedMovie: TrendingFilm) {
+  // get the object of the trending film and pass it to the state -> here we will get the data inside the local storage
+  getFilmDataOnUserClick(targetedMovie: TrendingFilm): void {
     this.state.storeLikedMoviesOnUserClick(targetedMovie);
   }
 }

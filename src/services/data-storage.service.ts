@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { Subject, map } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
 import { SearchData } from 'src/interfaces/searchData.interface';
@@ -15,11 +15,12 @@ export class DataStorage {
 
   // cache data
   cacheForTrendingMovies: TrendingFilm[] = [];
+  favoriteMoviesArray: TrendingFilm[] = [];
 
   constructor(private http: HttpClient) {}
 
   // search api end point
-  getMovieFromSearch(userSearchMovie: string) {
+  getMovieFromSearch(userSearchMovie: string): SearchData | Subscription {
     console.log(userSearchMovie);
     return this.http
       .get<SearchData>(
@@ -36,10 +37,10 @@ export class DataStorage {
   }
 
   // will use this for specigic movie -> this will be called on click
-  getSpecificMovieDetails() {
+  getSpecificMovieDetails(movieId: number) {
     return this.http
       .get(
-        `https://api.themoviedb.org/3/movie/575264?api_key=${environment._API_KEY}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${environment._API_KEY}&language=en-US`,
         {
           params: new HttpParams().set('auth', environment._AUTH_TOKEN),
         }
@@ -50,18 +51,18 @@ export class DataStorage {
   }
 
   // will use this for the showing of trending -> this will be called on init
-  getTrendingFilms() {
+  getTrendingFilms():
+    | ResponseDataForTrandingMovies
+    | Subscription
+    | TrendingFilm[] {
     // guard clause so we dont call the API every time we render the home component
     if (this.cacheForTrendingMovies.length > 0) {
-      // ...
-      console.log('WE HAVE DATA IN CACHE!');
-      console.log(this.cacheForTrendingMovies);
       return this.cacheForTrendingMovies;
     }
 
     return this.http
       .get<ResponseDataForTrandingMovies>(
-        `https://api.themoviedb.org/3/trending/all/week?api_key=${environment._API_KEY}`,
+        `https://api.themoviedb.org/3/trending/movie/week?api_key=${environment._API_KEY}`,
         {
           params: new HttpParams().set('auth', environment._AUTH_TOKEN),
         }
@@ -78,7 +79,22 @@ export class DataStorage {
       });
   }
 
-  getCacheData() {
+  // we call this method to set the data in the local storage
+  storeDataIntoLocalStorage(films: TrendingFilm[]): void {
+    localStorage.setItem('storedLikedMovies', JSON.stringify(films));
+  }
+
+  getDataFromLocalStorage(): TrendingFilm[] {
+    this.favoriteMoviesArray = JSON.parse(
+      localStorage.getItem('storedLikedMovies')
+    );
+
+    console.log(this.favoriteMoviesArray);
+
+    return this.favoriteMoviesArray;
+  }
+
+  getCacheData(): TrendingFilm[] {
     return this.cacheForTrendingMovies;
   }
 }

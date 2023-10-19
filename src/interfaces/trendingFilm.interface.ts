@@ -1,6 +1,6 @@
 export interface TrendingFilm {
   adult: boolean;
-  backdrop_path: string;
+  backdrop_path: string | null;
   genre_id: number[];
   id: number;
   media_type: string;
@@ -9,8 +9,7 @@ export interface TrendingFilm {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date?: string;
-  first_air_date?: string;
+  release_date: string;
   title: string;
   video: boolean;
   vote_average: number;
