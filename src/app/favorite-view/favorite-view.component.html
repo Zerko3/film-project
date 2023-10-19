@@ -6,6 +6,21 @@
 
   <!-- favorite films view goes here -->
   <div class="favorite__view--section__favorite--films--box">
+    <ng-container *ngIf="searchSidebarOpenStatus">
+      <div class="search__window">
+        <div class="close--btn--box">
+          <button (click)="onClickCloseSearchWindow()">
+            <i class="dx-icon-arrowleft"></i>
+          </button>
+        </div>
+        <div class="search__window__heading--box">
+          <h1>Search results</h1>
+        </div>
+        <app-search-window
+          [searchResultsArray]="searchResultsArray"
+        ></app-search-window>
+      </div>
+    </ng-container>
     <div class="favorite__view--section__favorite--films--box__heading--box">
       <h1>Your favorite films:</h1>
     </div>

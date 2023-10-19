@@ -15,12 +15,15 @@ import { State } from 'src/services/state.service';
 })
 export class FavoriteViewComponent implements OnInit, OnDestroy {
   favoriteMoviesArray: TrendingFilm[] = [];
+  searchResultsArray = [];
 
   popupVisible: boolean = false;
+  searchSidebarOpenStatus: boolean = false;
   selectedFilm: AdditionalInfoForTrendingFilm;
 
   additionalInfoSubscribe: Subscription;
   updateFavoriteArraySubscribe: Subscription;
+  searchMoviesSubscribe: Subscription;
 
   // toast
   isVisible: boolean = false;
@@ -75,11 +78,21 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
         this.message = `${errorMsg.error.status_message}. Please refresh the page. If the error persists, call our support.`;
         this.type = errorMsg ? 'error' : 'success';
       });
+
+    this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
+      (responseData: TrendingFilm[]) => {
+        this.searchResultsArray = responseData;
+        console.log(this.searchResultsArray);
+
+        this.searchSidebarOpenStatus = true;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.additionalInfoSubscribe.unsubscribe();
     this.updateFavoriteArraySubscribe.unsubscribe();
+    this.searchMoviesSubscribe.unsubscribe();
   }
 
   // pass the selcted item into the state to delete it
@@ -90,5 +103,9 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
   onUserClickGetAdditionalInfo(selectedFilm: TrendingFilm) {
     // pass the selected film into the api
     this.dataStorage.getSpecificMovieDetails(selectedFilm.id);
+  }
+
+  onClickCloseSearchWindow() {
+    this.searchSidebarOpenStatus = false;
   }
 }
