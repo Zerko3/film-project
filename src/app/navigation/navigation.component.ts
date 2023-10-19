@@ -9,18 +9,6 @@ import { DataStorage } from 'src/services/data-storage.service';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-  movieSearchData: {
-    movieName: string;
-  } = {
-    movieName: '',
-  };
-
-  buttonOptions: any = {
-    text: 'Search',
-    type: 'success',
-    useSubmitBehavior: true,
-  };
-
   constructor(private router: Router, private dataStorage: DataStorage) {}
   @ViewChild('form') formComponent: NgForm;
 

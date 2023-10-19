@@ -14,18 +14,23 @@ import { State } from 'src/services/state.service';
   styleUrls: ['./favorite-view.component.scss'],
 })
 export class FavoriteViewComponent implements OnInit, OnDestroy {
+  // arrays
   favoriteMoviesArray: TrendingFilm[] = [];
-  searchResultsArray = [];
+  searchResultsArray: TrendingFilm[] = [];
 
+  // boolean values
   popupVisible: boolean = false;
   searchSidebarOpenStatus: boolean = false;
+
+  // used for devextreme to get the info on the film when user clicks the icon
   selectedFilm: AdditionalInfoForTrendingFilm;
 
+  // Subscription elements
   additionalInfoSubscribe: Subscription;
   updateFavoriteArraySubscribe: Subscription;
   searchMoviesSubscribe: Subscription;
 
-  // toast
+  // toast - devextreme element
   isVisible: boolean = false;
   type: string = '';
   message: string = '';
@@ -56,11 +61,14 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
         }
       );
 
+    // we subscribe to the click so we see the popup as soon as the user clicks for better UX.
     this.additionalInfoSubscribe =
       this.dataStorage.additionalInfoSubject.subscribe(
         (responseData: AdditionalInfoForTrendingFilm) => {
+          // set the popup visible to true to render it on the DOM
           this.popupVisible = true;
 
+          // here we set the element data to be displayed.
           this.selectedFilm = responseData;
         }
       );
@@ -75,6 +83,7 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
         this.type = errorMsg ? 'error' : 'success';
       });
 
+    // we subscribe to the search so when the user wants to search for a film in the favorites component and if he clicks on the add to favorite button it will show on the screen as soon as the user click for better UX.s
     this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
       (responseData: TrendingFilm[]) => {
         this.searchResultsArray = responseData;
@@ -84,6 +93,7 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     );
   }
 
+  // when we go leave the component destroy the observables so we dont have memory leaks
   ngOnDestroy(): void {
     this.additionalInfoSubscribe.unsubscribe();
     this.updateFavoriteArraySubscribe.unsubscribe();
@@ -100,6 +110,7 @@ export class FavoriteViewComponent implements OnInit, OnDestroy {
     this.dataStorage.getSpecificMovieDetails(selectedFilm.id);
   }
 
+  // toggle the side view
   onClickCloseSearchWindow() {
     this.searchSidebarOpenStatus = false;
   }

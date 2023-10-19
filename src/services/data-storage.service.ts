@@ -33,7 +33,6 @@ export class DataStorage {
 
   // search api end point
   getMovieFromSearch(userSearchMovie: string): SearchData | Subscription {
-    console.log(userSearchMovie);
     return this.http
       .get<SearchData>(
         `https://api.themoviedb.org/3/search/movie?query=${userSearchMovie}&api_key=${environment._API_KEY}`,
@@ -43,8 +42,13 @@ export class DataStorage {
       )
       .subscribe(
         (responseData: SearchData) => {
+          // Filter out objects with null backdrop_path. We need this since some dont have imgs and it wont look good for the user if we dont do this here.
+          const filteredResults = responseData.results.filter(
+            (result) => result.backdrop_path !== null
+          );
+
           // pass into the subject we will get this data in the home
-          this.searchMovieSubject.next(responseData.results);
+          this.searchMovieSubject.next(filteredResults);
         },
         (error: HttpErrorResponse) => {
           // pass the error subject into the home component when search view is open

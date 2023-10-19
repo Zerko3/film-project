@@ -129,6 +129,16 @@
               font-size: 2rem;
               color: #333;
             }
+          }
+
+          p {
+            font-size: 1.5rem;
+            color: #333;
+          }
+
+          &__btn--box {
+            @include flexbox--flex-start;
+            gap: 1rem;
 
             dx-button {
               background-color: unset;
@@ -143,16 +153,6 @@
                 cursor: pointer;
               }
             }
-          }
-
-          p {
-            font-size: 1.5rem;
-            color: #333;
-          }
-
-          &__btn--box {
-            @include flexbox--flex-start;
-            gap: 1rem;
 
             .btn {
               padding: 1.2rem 2.4rem;
@@ -193,9 +193,9 @@
 }
 
 .popup--title {
-  font-size: font-size(font-size-large);
+  font-size: font-size(font-size-regular);
 }
 
 .popup--text {
-  font-size: font-size(font-size-regular);
+  font-size: font-size(font-size-small);
 }

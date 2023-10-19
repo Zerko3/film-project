@@ -11,17 +11,21 @@ import { State } from 'src/services/state.service';
   styleUrls: ['./home-component.component.scss'],
 })
 export class HomeComponentComponent implements OnInit, OnDestroy {
+  // Subscriptions
   trendingMoviesSubscribe: Subscription;
   searchMoviesSubscribe: Subscription;
 
+  // arrays
   dataSource: TrendingFilm[] = [];
   searchResultsArray: TrendingFilm[] = [];
+
+  // devextreme gallery timer
   slideshowDelay: number = 3500;
 
   // boolean
   searchSidebarOpenStatus: boolean;
 
-  // toast
+  // toast - devextreme element
   isVisible: boolean = false;
   type: string = '';
   message: string = '';
@@ -32,10 +36,10 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     // get trending data from API on component load
     this.dataStorage.getTrendingFilms();
 
-    // get cache data from service -> refactor this
+    // get cache data from service if we have any
     this.dataSource = this.dataStorage.getCacheData();
 
-    // subscribe to subject from the API component we call in this comonent on init
+    // subscribe to subject from the API component we call in this component on init
     this.trendingMoviesSubscribe =
       this.dataStorage.trendingMoviesSubject.subscribe(
         (responseData: TrendingFilm[]) => {
@@ -44,7 +48,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
         }
       );
 
-    // error handle the API
+    // error handle the API. Since we use pipe(take(1)) we dont need to unsubscribe here. We use it since we dont care for more than one error msg and when we get it we dont need to subscribe to it anymore
     this.dataStorage.errorSubject
       .pipe(take(1))
       .subscribe((errorMsg: HttpErrorResponse) => {
@@ -54,6 +58,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
         this.type = errorMsg ? 'error' : 'success';
       });
 
+    // subscribe to the search subject, so as soon as we search some move we will get it displayed on the DOM.
     this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
       (responseData: TrendingFilm[]) => {
         this.searchResultsArray = responseData;

@@ -41,31 +41,7 @@
             <h1>
               {{ film.original_title }}
             </h1>
-            <dx-button
-              icon="info"
-              (onClick)="onUserClickGetAdditionalInfo(film)"
-            >
-            </dx-button>
           </div>
-
-          <dx-popup
-            [width]="300"
-            [height]="280"
-            [showTitle]="true"
-            title="Information of the movie"
-            [dragEnabled]="false"
-            [hideOnOutsideClick]="true"
-            [showCloseButton]="false"
-            [(visible)]="popupVisible"
-          >
-            <div *dxTemplate="let data of 'content'">
-              <h1 class="popup--title">{{ selectedFilm.original_title }}</h1>
-              <p class="popup--text">
-                Total revenie: {{ selectedFilm.revenue }}$.
-              </p>
-              <p class="popup--text">Runtime: {{ selectedFilm.runtime }}min.</p>
-            </div>
-          </dx-popup>
 
           <p>
             Release date |
@@ -76,6 +52,11 @@
             <button (click)="onUserDeleteFilm(film)" class="btn btn--secondary">
               Remove
             </button>
+            <dx-button
+              icon="info"
+              (onClick)="onUserClickGetAdditionalInfo(film)"
+            >
+            </dx-button>
           </div>
         </div>
       </div>
@@ -84,4 +65,20 @@
 
   <dx-toast [(visible)]="isVisible" [type]="type" [message]="message">
   </dx-toast>
+
+  <dx-popup
+    [width]="300"
+    [height]="280"
+    [showTitle]="false"
+    [dragEnabled]="false"
+    [hideOnOutsideClick]="true"
+    [showCloseButton]="false"
+    [(visible)]="popupVisible"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <h1 class="popup--title">{{ selectedFilm.original_title }}</h1>
+      <p class="popup--text">Total revenie: {{ selectedFilm.revenue }}$.</p>
+      <p class="popup--text">Runtime: {{ selectedFilm.runtime }}min.</p>
+    </div>
+  </dx-popup>
 </section>
