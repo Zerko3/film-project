@@ -15,3 +15,13 @@ export interface TrendingFilm {
   vote_average: number;
   vote_count: number;
 }
+
+export interface AdditionalInfoForTrendingFilm extends TrendingFilm {
+  belongs_to_collection: [];
+  budget: number;
+  homepage: string;
+  production_companies: [];
+  production_countries: [];
+  revenue: number;
+  runtime: number;
+}

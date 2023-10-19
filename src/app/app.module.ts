@@ -14,6 +14,7 @@ import {
   DxFormModule,
   DxTreeListModule,
   DxToastModule,
+  DxPopupModule,
 } from 'devextreme-angular';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
@@ -44,6 +45,7 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     DxFormModule,
     DxTreeListModule,
     DxToastModule,
+    DxPopupModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

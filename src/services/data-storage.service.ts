@@ -9,7 +9,10 @@ import { Subject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ResponseDataForTrandingMovies } from 'src/interfaces/responseData.interface';
 import { SearchData } from 'src/interfaces/searchData.interface';
-import { TrendingFilm } from 'src/interfaces/trendingFilm.interface';
+import {
+  AdditionalInfoForTrendingFilm,
+  TrendingFilm,
+} from 'src/interfaces/trendingFilm.interface';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -17,6 +20,7 @@ export class DataStorage {
   trendingMoviesSubject = new Subject<TrendingFilm[]>();
   searchMovieSubject = new Subject<any>();
   errorSubject = new Subject<HttpErrorResponse>();
+  additionalInfoSubject = new Subject<any>();
 
   // cache data
   cacheForTrendingMovies: TrendingFilm[] = [];
@@ -59,9 +63,15 @@ export class DataStorage {
           params: new HttpParams().set('auth', environment._AUTH_TOKEN),
         }
       )
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe(
+        (responseData: AdditionalInfoForTrendingFilm) => {
+          this.additionalInfoSubject.next(responseData);
+        },
+        (error: HttpErrorResponse) => {
+          // pass the error subject into the home component
+          this.errorSubject.next(error);
+        }
+      );
   }
 
   // will use this for the showing of trending -> this will be called on init

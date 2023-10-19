@@ -12,6 +12,7 @@ import { State } from 'src/services/state.service';
 })
 export class HomeComponentComponent implements OnInit, OnDestroy {
   trendingMoviesSubscribe: Subscription;
+  searchMoviesSubscribe: Subscription;
 
   dataSource: TrendingFilm[] = [];
   searchResultsArray: TrendingFilm[] = [];
@@ -38,8 +39,6 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     this.trendingMoviesSubscribe =
       this.dataStorage.trendingMoviesSubject.subscribe(
         (responseData: TrendingFilm[]) => {
-          console.log(responseData);
-
           // pass the data into the array to display it
           this.dataSource = responseData;
         }
@@ -49,18 +48,13 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     this.dataStorage.errorSubject
       .pipe(take(1))
       .subscribe((errorMsg: HttpErrorResponse) => {
-        console.log(errorMsg);
-
         // handle here
         this.isVisible = true;
         this.message = `${errorMsg.error.status_message}. Please refresh the page. If the error persists, call our support.`;
         this.type = errorMsg ? 'error' : 'success';
       });
 
-    // specific movie
-    // this.dataStorage.getSpecificMovieDetails();
-
-    this.dataStorage.searchMovieSubject.subscribe(
+    this.searchMoviesSubscribe = this.dataStorage.searchMovieSubject.subscribe(
       (responseData: TrendingFilm[]) => {
         this.searchResultsArray = responseData;
         console.log(this.searchResultsArray);
@@ -73,6 +67,7 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   // unsubscribe from observables
   ngOnDestroy(): void {
     this.trendingMoviesSubscribe.unsubscribe();
+    this.searchMoviesSubscribe.unsubscribe();
   }
 
   // close the search sidebar

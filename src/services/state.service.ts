@@ -12,10 +12,6 @@ export class State {
 
   constructor() {}
 
-  // TODO:
-
-  // 3. Make some UX changes, when adding to favorite, make some toast and icon animation, aswell as removeing
-
   // get the liked movies in the home component and pass them into the favoriteMoviesArray
   storeLikedMoviesOnUserClick(likedMovie: TrendingFilm) {
     console.log(likedMovie);

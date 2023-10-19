@@ -83,16 +83,16 @@
               color: #333;
             }
 
-            button {
+            dx-button {
               background-color: unset;
               border: none;
+              font-size: font-size(font-size-large);
 
               i {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 color: #333;
-                font-size: font-size(font-size-large);
                 cursor: pointer;
               }
             }
@@ -139,4 +139,16 @@
       }
     }
   }
+}
+
+::ng-deep .dx-button-content .dx-icon {
+  font-size: font-size(font-size-large);
+}
+
+.popup--title {
+  font-size: font-size(font-size-large);
+}
+
+.popup--text {
+  font-size: font-size(font-size-regular);
 }
