@@ -1,4 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
@@ -12,10 +16,14 @@ export class DataStorage {
   // subject - will get an array
   trendingMoviesSubject = new Subject<TrendingFilm[]>();
   searchMovieSubject = new Subject<any>();
+  errorSubject = new Subject<HttpErrorResponse>();
 
   // cache data
   cacheForTrendingMovies: TrendingFilm[] = [];
   favoriteMoviesArray: TrendingFilm[] = [];
+
+  // error status
+  errorStatus: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -29,11 +37,17 @@ export class DataStorage {
           params: new HttpParams().set('auth', environment._AUTH_TOKEN),
         }
       )
-      .subscribe((responseData: SearchData) => {
-        console.log(responseData.results);
-        // pass into the subject we will get this data in the home
-        this.searchMovieSubject.next(responseData.results);
-      });
+      .subscribe(
+        (responseData: SearchData) => {
+          console.log(responseData.results);
+          // pass into the subject we will get this data in the home
+          this.searchMovieSubject.next(responseData.results);
+        },
+        (error: HttpErrorResponse) => {
+          // pass the error subject into the home component when search view is open
+          this.errorSubject.next(error);
+        }
+      );
   }
 
   // will use this for specigic movie -> this will be called on click
@@ -67,16 +81,25 @@ export class DataStorage {
           params: new HttpParams().set('auth', environment._AUTH_TOKEN),
         }
       )
-      .subscribe((responseData: ResponseDataForTrandingMovies) => {
-        // console.log(responseData);
-        console.log(responseData.results);
+      .subscribe(
+        (responseData: ResponseDataForTrandingMovies) => {
+          // console.log(responseData);
+          console.log(responseData.results);
 
-        // store cache so we dont call the API every time we go to home component
-        this.cacheForTrendingMovies = responseData.results;
+          // store cache so we dont call the API every time we go to home component
+          this.cacheForTrendingMovies = responseData.results;
 
-        // pass the data into the subject to get it on the DOM
-        this.trendingMoviesSubject.next(responseData.results);
-      });
+          // pass the data into the subject to get it on the DOM
+          this.trendingMoviesSubject.next(responseData.results);
+        },
+        (error: HttpErrorResponse) => {
+          console.log('THIS IS AN ERROR NOW!');
+          console.log(error);
+
+          // pass the error subject into the home component
+          this.errorSubject.next(error);
+        }
+      );
   }
 
   // we call this method to set the data in the local storage

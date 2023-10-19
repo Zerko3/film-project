@@ -13,6 +13,7 @@ import {
   DxButtonModule,
   DxFormModule,
   DxTreeListModule,
+  DxToastModule,
 } from 'devextreme-angular';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteViewComponent } from './favorite-view/favorite-view.component';
@@ -42,6 +43,7 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     DxButtonModule,
     DxFormModule,
     DxTreeListModule,
+    DxToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
